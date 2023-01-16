@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+register
+{% endblock %}
+{% block content %}
+    <!-- Start Content Page -->
+    <div class="container-fluid bg-light py-5">
+        <div class="col-md-6 m-auto text-center">
+            <h1 class="h1">UserRegister</h1>
+            <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid,
+            </p>
+        </div>
+    </div>
+
+    <!-- Start Contact -->
+    <div class="container py-5">
+        <div class="row py-5">
+            <form class="col-md-9 m-auto" method="post" role="form">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="form-group col-md-6 mb-3">
+                        {% for error in form.phone.errors %}
+                        <p class="alert alert-danger" id="text-align-2">{{error}}</p>
+                        {% endfor %}
+                        {{form.phone}}
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        {% for error in form.password.errors %}
+                        <p class="alert alert-danger" id="text-align-2">{{error}}</p>
+                        {% endfor %}
+                        {{form.password}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-end mt-2">
+                        <button type="submit" class="btn btn-success btn-lg px-3">send</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- End Contact -->
+
+
+ 
+
+    <!-- Start Script -->
+    <script src="{% static "js/jquery-1.11.0.min.js" %}}"></script>
+    <script src="{% static "js/jquery-migrate-1.2.1.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.bundle.min.js" %}"></script>
+    <script src="{% static "js/templatemo.js" %}"></script>
+    <script src="{% static "js/custom.js" %}"></script>
+    <!-- End Script -->
+{% endblock %}

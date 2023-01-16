@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 from os import path
 from datetime import timedelta
+from telnetlib import AUTHENTICATION
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -32,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'admin_persian',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,11 +42,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #my apps:
     'home_app',
+    'account',
+    'blog',
     #my packeges:
     'social_django',
     'widget_tweaks',
     'django_render_partial',
     'webpush',
+    'django_openid_auth',
 ]
 
 MIDDLEWARE = [
@@ -111,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fa-ir'
 
 TIME_ZONE = 'UTC'
 
@@ -141,12 +146,20 @@ MEDIA_ROOT = path.join(BASE_DIR, 'media')
 # EMAIL_PORT = 600
 # EMAIL_HOST_USER = 'amirghazanfari738@gmail.com'
 # EMAIL_HOST_PASSWORD = 'Amir1230'
+AUTH_USER_MODEL = 'account.User'
 
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.google.GoogleOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-)
-
+# AUTHENTICATION_BACKENDS = (
+#     'django.contrib.auth.backends.ModelBackend',
+#     'django_openid_auth.auth.OpenIDBackend',
+# )
+# AUTHENTICATION_BACKENDS = (
+#     'api.backend.EmailOrUsernameModelBackend',
+#     'django.contrib.auth.backends.ModelBackend',
+# )
+# AUTHENTICATION_BACKENDS = (
+#     'social_core.backends.google.GoogleOAuth2',
+#     'django.contrib.auth.backends.ModelBackend',
+# )
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
@@ -187,3 +200,4 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend','account.athentication.EmailAthentication']

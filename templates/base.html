@@ -13,10 +13,16 @@
     <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
     <link rel="stylesheet" href="{% static "css/templatemo.css" %}">
     <link rel="stylesheet" href="{% static "css/custom.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
 
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="{% static "css/fontawesome.min.css" %}">
+      <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/1cd78581a0.js" crossorigin="anonymous"></script>
 <!--
     
 TemplateMo 559 Zay Shop
@@ -24,6 +30,56 @@ TemplateMo 559 Zay Shop
 https://templatemo.com/tm-559-zay-shop
 
 -->
+<style>
+    /* Style The Dropdown Button */
+    .dropbtn {
+      background-color: #ffffff;
+      color: rgb(0, 0, 0);
+      padding: 16px;
+      font-size: 14px;
+      border: 1px solid rgb(0, 0, 0);
+      cursor: pointer;
+      width: 9em;
+      height: 2em;
+    }
+    
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+      display: inline-block;
+    }
+    
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    
+    /* Links inside the dropdown */
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {background-color: #f1f1f1}
+    
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    /* .dropdown:hover .dropbtn {
+      background-color: #3e8e41;
+    } */
+    </style>
+    
 </head>
 
 <body>
@@ -94,10 +150,19 @@ https://templatemo.com/tm-559-zay-shop
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                         <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
-                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
-                    </a>
+                    <div class="dropdown">
+                        <button class="dropbtn"><span style="position: relative;top:-0.7em;">MyAccount<i class="fa-solid fa-caret-down"></i></span></button>
+                        <!-- <span style="position: relative;top:-0.1em;"><i class="fa-solid fa-user"></i><i class="fa-solid fa-caret-down"></i></span> -->
+                        <div class="dropdown-content">
+                          {% if request.user.is_authenticated %}
+                          <a href="#"><i class="fa-solid fa-user"></i>profile</a>
+                          <a href="#"><i class="fa-solid fa-heart"></i>favorite</a>
+                          <a href="{% url 'account:logout' %}"><i class="fa-solid fa-arrow-right-from-bracket" style="margin-right:0.3em;"></i>logout</a>
+                          {% else %}
+                          <a href="{% url 'account:register' %}"><i class="fa-solid fa-registered"></i> register / login</a>
+                          {% endif %}
+                        </div>
+                    </div>
                 </div>
             </div>
 
